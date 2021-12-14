@@ -254,6 +254,30 @@ open class KeychainWrapper {
     }
     
     // MARK: Public Setters
+    @discardableResult open func setObject(_ value: Any, forKey key: String, withAccessibility accessibility: KeychainItemAccessibility? = nil, isSynchronizable: Bool = false) -> Bool {
+        if let value = value as? Int {
+            return set(value, forKey: key)
+        }
+        if let value = value as? Float {
+            return set(value, forKey: key)
+        }
+        if let value = value as? Double {
+            return set(value, forKey: key)
+        }
+        if let value = value as? Bool {
+            return set(value, forKey: key)
+        }
+        if let value = value as? String {
+            return set(value, forKey: key)
+        }
+        if let value = value as? NSCoding {
+            return set(value, forKey: key)
+        }
+        if let value = value as? Data {
+            return set(value, forKey: key)
+        }
+        return false
+    }
     
     @discardableResult open func set(_ value: Int, forKey key: String, withAccessibility accessibility: KeychainItemAccessibility? = nil, isSynchronizable: Bool = false) -> Bool {
         return set(NSNumber(value: value), forKey: key, withAccessibility: accessibility, isSynchronizable: isSynchronizable)
